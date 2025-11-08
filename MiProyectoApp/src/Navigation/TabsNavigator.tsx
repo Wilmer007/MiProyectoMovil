@@ -1,9 +1,10 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import HomeScreen from '../Screens/HomeScreen';
+
 //import ProfileScreen from '../Screens/';
 
 export type TabsParamList = {
-    Home: undefined;
+    Home: {newItem?: string} | undefined;
     Profile: undefined;
 }
 
