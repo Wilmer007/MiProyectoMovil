@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { Button, StyleSheet, Text, View, Image} from 'react-native';
 import Custominput from '../Components/Custominput';
+import { useAuth } from '../contexts/AuthContext';
 
 
 
@@ -10,6 +11,20 @@ export default function LoginScreen({navigation} : any) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('')
 
+  const {login, isAllowed} = useAuth();
+
+  const handleLogin = () => {
+    try {
+      const allowed = login(email, password);
+      if (!allowed) {
+        console.log('Usuario no autorizado');
+        return;
+      }
+        navigation.navigate('Tabs', {email: email});
+    } catch (error) {
+        console.log(error);
+    }
+  }
       const handleRegistro = () => {
     try {
         navigation.navigate('Tabs');
@@ -39,7 +54,7 @@ export default function LoginScreen({navigation} : any) {
                   placeholder={'contrasena'}
                   onChange={setPassword}/>
       
-      
+                  <Button title="Login" onPress={handleLogin}/>
                    <Text style={styles.SmallText}>No tienes cuenta ?</Text>
                   <Button title="Registrate" onPress={handleRegistro}/>
       
