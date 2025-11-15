@@ -1,15 +1,123 @@
-import { View, Text, Button } from "react-native";
+import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-export default function  Registro(navigate: any) {
-
-    return (
-
-        <SafeAreaView>
-            <Text>Registro Screen</Text>
-        </SafeAreaView>
+import CustomInput from "../Components/Custominput";
 
 
+import { View, Text, Button, TouchableOpacity, FlatList, StyleSheet } from "react-native";
 
-    );
-}
+            export default function Registro({ navigation }: any) {
+                const enfoques = [
+                    { id: "1", title: "Rutinas y programas" },
+                    { id: "2", title: "Nutrición y dietas" },
+                    { id: "3", title: "Seguimiento de progreso" },
+                    { id: "4", title: "Comunidad y soporte" },
+                    { id: "5", title: "Desafíos y recompensas" },
+                ];
+
+                const [name, setName] = useState("");
+                const [email, setEmail] = useState("");
+                const [password, setPassword] = useState("");
+                const [confirmPassword, setConfirmPassword] = useState("");
+                const [phone, setPhone] = useState("");
+                const [selectedIds, setSelectedIds] = useState<string[]>([]); // IDs of selected items
+
+                const handleSelect = (item: { id: string; title: string }) => {
+                    setSelectedIds((prev) =>
+                        prev.includes(item.id) ? prev.filter((id) => id !== item.id) : [...prev, item.id]
+                    );
+                };
+
+                const handleSendForm = () => {
+                    if (name.trim() === "" || email.trim() === "") return;
+
+                    const selectedItems = enfoques.filter((e) => selectedIds.includes(e.id));
+
+                    const form = {
+                        name,
+                        email,
+                        password,
+                        confirmPassword,
+                        phone,
+                        enfoques: selectedItems,
+                    };
+
+                    navigation.navigate("Tabs", {
+                        screen: "Home",
+                        params: { form },
+                    });
+                };
+
+                return (
+                    
+
+                    <SafeAreaView style={styles.container}>
+                        <Text style={styles.CenterText}>Regístrate</Text>
+                        <CustomInput value={name} placeholder="Nombre Completo" onChange={setName} />
+                        <CustomInput value={email} placeholder="Correo electrónico" type="email" onChange={setEmail} />
+                        <CustomInput value={password} placeholder="Contraseña" type="password" onChange={setPassword} />
+                        <CustomInput
+                            value={confirmPassword}
+                            placeholder="Confirmar contraseña"
+                            type="password"
+                            onChange={setConfirmPassword}
+                        />
+                        <CustomInput value={phone} placeholder="Teléfono" type="number" onChange={setPhone} />
+
+                        <Text style={[styles.MainText, { fontSize: 20 }]}>Selecciona tus enfoques de interés</Text>
+                        <FlatList
+                            data={enfoques}
+                            keyExtractor={(item) => item.id}
+                            renderItem={({ item }) => {
+                                const selected = selectedIds.includes(item.id);
+                                return (
+                                    <TouchableOpacity
+                                        style={[styles.option, selected && styles.optionSelected]}
+                                        onPress={() => handleSelect(item)}
+                                    >
+                                        <Text style={[styles.optionText, selected && styles.optionTextSelected]}>{item.title}</Text>
+                                    </TouchableOpacity>
+                                );
+                            }}
+                        />
+
+                        <Button title="Registrarse" onPress={handleSendForm} />
+                    </SafeAreaView>
+                
+                );
+            }
+
+            const styles = StyleSheet.create({
+                container: {
+                    flex: 1,
+                    alignItems: "flex-start",
+                    justifyContent: "center",
+                    padding: 20,
+                },
+                MainText: {
+                    fontSize: 24,
+                    marginBottom: 20,
+                },
+                option: {
+                    padding: 10,
+                    borderBottomWidth: 1,
+                    borderBottomColor: "#ddd",
+                    width: "100%",
+                },
+                optionSelected: {
+                    backgroundColor: "#e6f0ff",
+                },
+                optionText: {
+                    fontSize: 15,
+                },
+                optionTextSelected: {
+                    fontWeight: "600",
+                },
+                CenterText :{
+                fontSize: 24,
+                    marginBottom: 30,
+                    alignSelf: 'center',
+                }
+            });
+        
+    
+    

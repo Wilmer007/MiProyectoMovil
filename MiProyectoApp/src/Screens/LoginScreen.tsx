@@ -60,20 +60,7 @@ export default function LoginScreen({navigation} : any) {
         </View>
       </View>
 
-      <View
-        style={{
-          position: 'absolute',
-          left: 0,
-          right: 0,
-          bottom: 10,
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
-          paddingHorizontal: 16,
-
-          pointerEvents: 'box-none',
-        }}
-      >
+      <View style={styles.ImagenesDeAbajo}>
         <Image
           source={require('/Users/wilmerisaacgodoyescoto/Documents/ProgramacionMovil/MiProyectoMovil/MiProyectoApp/src/depositphotos_284191856-stock-illustration-gym-logo-vector.jpg')}
           style={{ width: 150, height: 100, marginRight: 25 }}
@@ -214,6 +201,17 @@ const styles = StyleSheet.create({
       // slight visual effects
       opacity: 0.98,
       transform: [{ rotate: '-2deg' }],
+    }, 
+    ImagenesDeAbajo :{
+      position: 'absolute',
+          left: 0,
+          right: 0,
+          bottom: 10,
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingHorizontal: 16,
+
+          pointerEvents: 'box-none',
     }
-  }
-);
+});

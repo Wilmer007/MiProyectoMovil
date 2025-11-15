@@ -2,9 +2,11 @@ import { View, Text } from "react-native";
 import { StyleSheet } from "react-native";
 import { Button } from "react-native";
 
-export default function HomeScreen({route}: any) {
+export default function HomeScreen({navigation}: any) {
 
 const handleGuardarRutinas = () => {
+    // perform the save action or navigate; using console.log as a placeholder
+    navigation.navigate('GuardarRutinas');
 }
 
 
