@@ -99,7 +99,7 @@ import { View, Text, Button, TouchableOpacity, FlatList, StyleSheet } from "reac
                 },
                 option: {
                     padding: 10,
-                    borderBottomWidth: 1,
+                    borderBottomWidth: 5,
                     borderBottomColor: "#ddd",
                     width: "100%",
                 },

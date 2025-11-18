@@ -1,23 +1,25 @@
 import { View, Text } from "react-native";
 import { StyleSheet } from "react-native";
 import { Button } from "react-native";
+ 
 
 export default function HomeScreen({navigation}: any) {
 
-const handleGuardarRutinas = () => {
-    // perform the save action or navigate; using console.log as a placeholder
-    navigation.navigate('GuardarRutinas');
-}
-
-
-    return(
-        <View>
-            <Text style={styles.Main}>Bienvenido</Text>
-            <Button title="Guardar Rutinas" onPress={handleGuardarRutinas}/>
-        </View>
-
-
-    )
+return (
+    <View>
+        <Text style={styles.Main}>Bienvenido</Text>
+        <Button
+            title="Guardar Rutinas"
+            onPress={() => {
+                if (navigation && typeof navigation.navigate === 'function') {
+                    navigation.navigate('GuardaRutinas');
+                } else {
+                    console.warn('Navigation is not available');
+                }
+            }}
+        />
+    </View>
+);
 }
 
 const styles = StyleSheet.create({
