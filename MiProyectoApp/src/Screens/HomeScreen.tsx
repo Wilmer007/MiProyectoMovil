@@ -8,7 +8,7 @@ export default function HomeScreen({navigation}: any) {
 return (
     <View>
         <Text style={styles.Main}>Bienvenido</Text>
-        <Button
+        <Button 
             title="Guardar Rutinas"
             onPress={() => {
                 if (navigation && typeof navigation.navigate === 'function') {
@@ -17,6 +17,19 @@ return (
                     console.warn('Navigation is not available');
                 }
             }}
+
+        />
+        <Text style={styles.Spacing}>........................... </Text>
+        <Button 
+            title="Mis Rutinas"
+            onPress={() => {
+                if (navigation && typeof navigation.navigate === 'function') {
+                    navigation.navigate('MisRutinas');
+                } else {
+                    console.warn('Navigation is not available');
+                }
+            }}
+
         />
     </View>
 );
@@ -46,5 +59,10 @@ Main:{
     shadowOpacity: 0.12,
     shadowRadius: 12,
     elevation: 10,
+  },
+  Spacing:
+  {
+    marginVertical: 10,
+    alignSelf: 'center',
   }
 })

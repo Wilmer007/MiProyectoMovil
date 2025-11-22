@@ -3,6 +3,7 @@ import HomeScreen from '../Screens/HomeScreen';
 import LoginScreen from '../Screens/LoginScreen';
 import Registro from '../Screens/Registro';
 import GuardaRutinas from '../Screens/GuardaRutinas';
+import MisRutinas from '../Screens/MisRutinas';
 
 
 //import ProfileScreen from '../Screens/';
@@ -12,6 +13,7 @@ export type TabsParamList = {
     Profile: undefined;
     Login: undefined;
     GuardaRutinas: undefined;
+    MisRutinas: undefined;
 
 }
 

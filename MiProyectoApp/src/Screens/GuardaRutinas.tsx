@@ -1,13 +1,19 @@
 import React from 'react';
-import { View, Text , StyleSheet, Button, TouchableOpacity, FlatList, ScrollViewBase ,} from 'react-native';  
+import { View, Text , StyleSheet, Button, TouchableOpacity, FlatList, ScrollViewBase, ScrollViewComponent ,} from 'react-native';  
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Custominput from '../Components/Custominput';
 import { useState } from 'react';
 import {Ionicons, MaterialIcons} from "@expo/vector-icons"
 import { ScrollView } from 'react-native';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { setUserProfile } from '../store/userSlice';
 
 
 export default function GuardaRutinas({navigation}: any) {
+
+    const dispatch = useAppDispatch();
+
+    const savedData = useAppSelector((state) => state.user);
 
     const Musculos = [
                     { id: "1", title: "Pecho" },
@@ -49,6 +55,20 @@ export default function GuardaRutinas({navigation}: any) {
             console.log('Por favor, complete todos los campos');
             return;
         }
+        dispatch(
+            setUserProfile({
+                nombreRutina: NombreRutina,
+                Descripcion: Descripcion,
+                NumSeries: NumSeries,
+                NumRepeticiones: NumRepeticiones,
+                DiasSemana: DiasSemana,
+                selectedIds: selectedIds
+            })
+
+            
+            
+        );
+
         console.log('Rutina guardada:', {
             NombreRutina,
             Descripcion,
@@ -65,6 +85,7 @@ export default function GuardaRutinas({navigation}: any) {
         setNumRepeticiones('');
         setDiasSemana('');
         setSelectedIds([]);
+       
     }
 
 
