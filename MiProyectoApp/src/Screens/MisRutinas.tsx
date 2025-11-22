@@ -8,7 +8,7 @@ import { useAppSelector } from "../store/hooks";
 
 export default function MisRutinas({navigation}: any) {
 
-const userProfile = useAppSelector((state) => state.user);
+const userProfile = useAppSelector((state) => state.rutines);
 
 return (
     <SafeAreaView style={styles.container}>

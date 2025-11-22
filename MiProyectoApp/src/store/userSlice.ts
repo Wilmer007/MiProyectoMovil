@@ -1,21 +1,16 @@
 
-
-export interface UserProfile {
-    nombreRutina: string;
-    Descripcion: string;
-    NumSeries: string;
-    NumRepeticiones: string;
-    DiasSemana: string;
-    selectedIds: string[];
+export interface userProfile {
+    interes : string[];
+    name: string;
+    email: string;
+    password:  string;
 }
 
-const initialState: UserProfile = {
-    nombreRutina: '',
-    Descripcion: '',
-    NumSeries: '',
-    NumRepeticiones: '',
-    DiasSemana: '',
-    selectedIds: []
+const initialState: userProfile = {
+    interes : [],
+    name: '',
+    email: '',
+    password:  '',
 };
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
@@ -24,13 +19,11 @@ export const UserSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        setUserProfile: (state, action: PayloadAction<UserProfile>) => {
-            state.nombreRutina = action.payload.nombreRutina;
-            state.Descripcion = action.payload.Descripcion;
-            state.NumSeries = action.payload.NumSeries;
-            state.NumRepeticiones = action.payload.NumRepeticiones;
-            state.DiasSemana = action.payload.DiasSemana;
-            state.selectedIds = action.payload.selectedIds;
+        setUserProfile: (state, action: PayloadAction<userProfile>) => {
+            state.interes = action.payload.interes;
+            state.name = action.payload.name;
+            state.email = action.payload.email;
+            state.password = action.payload.password;
         } ,  
         clearUserProfile: () => initialState,
         

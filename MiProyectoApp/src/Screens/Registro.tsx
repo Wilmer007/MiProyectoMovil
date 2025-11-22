@@ -1,17 +1,25 @@
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomInput from "../Components/Custominput";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { setUserProfile } from "../store/userSlice";
 
 
 import { View, Text, Button, TouchableOpacity, FlatList, StyleSheet } from "react-native";
 
             export default function Registro({ navigation }: any) {
+
+                const dispatch = useAppDispatch();
+
+                const savedData = useAppSelector((state) => state.user);
+
+
                 const enfoques = [
                     { id: "1", title: "Rutinas y programas" },
                     { id: "2", title: "Nutrición y dietas" },
                     { id: "3", title: "Seguimiento de progreso" },
                     { id: "4", title: "Comunidad y soporte" },
-                    { id: "5", title: "Desafíos y recompensas" },
+                    { id: "5", title: "informacion y Retro alimentacion" },
                 ];
 
                 const [name, setName] = useState("");
@@ -19,7 +27,7 @@ import { View, Text, Button, TouchableOpacity, FlatList, StyleSheet } from "reac
                 const [password, setPassword] = useState("");
                 const [confirmPassword, setConfirmPassword] = useState("");
                 const [phone, setPhone] = useState("");
-                const [selectedIds, setSelectedIds] = useState<string[]>([]); // IDs of selected items
+                const [selectedIds, setSelectedIds] = useState<string[]>([]); 
 
                 const handleSelect = (item: { id: string; title: string }) => {
                     setSelectedIds((prev) =>
@@ -29,6 +37,15 @@ import { View, Text, Button, TouchableOpacity, FlatList, StyleSheet } from "reac
 
                 const handleSendForm = () => {
                     if (name.trim() === "" || email.trim() === "") return;
+
+                    dispatch(
+                        setUserProfile({
+                            interes: enfoques.filter((e) => selectedIds.includes(e.id)).map((e) => e.title),
+                            name: name,
+                            email: email,
+                            password: password,
+                        })
+                    );
 
                     const selectedItems = enfoques.filter((e) => selectedIds.includes(e.id));
 
@@ -42,7 +59,7 @@ import { View, Text, Button, TouchableOpacity, FlatList, StyleSheet } from "reac
                     };
 
                     navigation.navigate("Tabs", {
-                        screen: "Home",
+                        screen: "LoginScreen",
                         params: { form },
                     });
                 };

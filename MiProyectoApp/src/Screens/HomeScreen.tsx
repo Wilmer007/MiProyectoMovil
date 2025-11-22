@@ -31,6 +31,30 @@ return (
             }}
 
         />
+        <Text style={styles.Spacing}>........................... </Text>
+        <Button 
+            title="Macros"
+            onPress={() => {
+                if (navigation && typeof navigation.navigate === 'function') {
+                    navigation.navigate('Macros');
+                } else {
+                    console.warn('Navigation is not available');
+                }
+            }}
+
+        />
+        <Text style={styles.Spacing}>........................... </Text>
+        <Button 
+            title="Retroalimentacion"
+            onPress={() => {
+                if (navigation && typeof navigation.navigate === 'function') {
+                    navigation.navigate('Retroalimentacion');
+                } else {
+                    console.warn('Navigation is not available');
+                }
+            }}
+
+        />
     </View>
 );
 }

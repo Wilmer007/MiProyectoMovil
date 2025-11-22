@@ -6,14 +6,14 @@ import { useState } from 'react';
 import {Ionicons, MaterialIcons} from "@expo/vector-icons"
 import { ScrollView } from 'react-native';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { setUserProfile } from '../store/userSlice';
+import { setRutineProfile } from '../store/rutineSlice';
 
 
 export default function GuardaRutinas({navigation}: any) {
 
     const dispatch = useAppDispatch();
 
-    const savedData = useAppSelector((state) => state.user);
+    const savedData = useAppSelector((state) => state.rutines);
 
     const Musculos = [
                     { id: "1", title: "Pecho" },
@@ -36,7 +36,7 @@ export default function GuardaRutinas({navigation}: any) {
     const [NumSeries, setNumSeries] = useState('');
     const [NumRepeticiones, setNumRepeticiones] = useState('');
     const [DiasSemana, setDiasSemana] = useState('');
-                    const [selectedIds, setSelectedIds] = useState<string[]>([]); 
+    const [selectedIds, setSelectedIds] = useState<string[]>([]); 
 
 
                     const handleSelect = (item: { id: string; title: string }) => {
@@ -56,7 +56,7 @@ export default function GuardaRutinas({navigation}: any) {
             return;
         }
         dispatch(
-            setUserProfile({
+            setRutineProfile({
                 nombreRutina: NombreRutina,
                 Descripcion: Descripcion,
                 NumSeries: NumSeries,
@@ -64,10 +64,11 @@ export default function GuardaRutinas({navigation}: any) {
                 DiasSemana: DiasSemana,
                 selectedIds: selectedIds
             })
-
             
             
         );
+       
+
 
         console.log('Rutina guardada:', {
             NombreRutina,
@@ -238,3 +239,48 @@ const styles = StyleSheet.create({
             fontWeight: '600',
     },
 })
+
+/*const Guardar = () => {
+        if (!NombreRutina || !Descripcion || !NumSeries || !NumRepeticiones || !DiasSemana) {
+            console.log('Por favor, complete todos los campos');
+            return;
+        }
+
+        // Construir la nueva rutina
+        const nuevaRutina = {
+            id: Date.now().toString(),
+            nombreRutina: NombreRutina,
+            descripcion: Descripcion,
+            numSeries: NumSeries,
+            numRepeticiones: NumRepeticiones,
+            diasSemana: DiasSemana,
+            musculosSeleccionados: selectedIds,
+            createdAt: new Date().toISOString(),
+        };
+
+        // Obtener array existente de rutinas (soporta caso donde aún no existe)
+        const existingRutinas = (savedData && (savedData as any).rutinas) ? (savedData as any).rutinas : [];
+
+        // Guardar agregando la nueva rutina al array
+        dispatch(
+            setUserProfile({
+                ...(savedData as any),
+                rutinas: [...existingRutinas, nuevaRutina],
+            })
+        );
+
+        console.log('Rutina guardada:', nuevaRutina);
+
+        // Limpiar campos
+        setNombreRutina('');
+        setDescripcion('');
+        setNumSeries('');
+        setNumRepeticiones('');
+        setDiasSemana('');
+        setSelectedIds([]);
+
+        // Navegar a la pantalla MisRutinas para ver todas las rutinas (asegúrate que la ruta exista)
+        if (navigation && typeof navigation.navigate === 'function') {
+            navigation.navigate('MisRutinas');
+        }
+    };*/
