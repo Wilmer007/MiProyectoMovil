@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "./rutineSlice";
+import userReducer from "./userSlice";
 import rutineReducer from "./rutineSlice";
 
 

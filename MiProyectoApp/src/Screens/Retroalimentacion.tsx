@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { useAppSelector } from '../store/hooks';
 
 
+
 export default function Retroalimentacion({navigation}: any) {
 
 
@@ -15,15 +16,9 @@ export default function Retroalimentacion({navigation}: any) {
 return (
     <View>
         <Text style={styles.Main}>Informacion segura y legitima</Text>
-        <Text>Tu informacion e intereses</Text>
-        <Text>Nombre</Text>
-        <Text>{savedData.name}</Text>
-        <Text>Email</Text>
-        <Text>{savedData.email}</Text>
-        <Text>Intereses seleccionados</Text>
-        <Text>{savedData.interes}</Text>
-
-        
+        <Text>Nombre, {savedData.name}</Text>
+        <Text>Email, {savedData.email}</Text>
+        <Text>Intereses seleccionados,{savedData.interes} </Text>
 
     </View>
 );
