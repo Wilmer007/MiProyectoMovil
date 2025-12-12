@@ -5,13 +5,17 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { setUserProfile } from "../store/userSlice";
 
 
-import { View, Text, Button, TouchableOpacity, FlatList, StyleSheet } from "react-native";
+import { View, Text, Button, TouchableOpacity, FlatList, StyleSheet , Alert} from "react-native";
+import { useAuth } from "../contexts/AuthContext";
 
             export default function Registro({ navigation }: any) {
 
                 const dispatch = useAppDispatch();
 
                 const savedData = useAppSelector((state) => state.user);
+
+                const {register} = useAuth();
+
 
 
                 const enfoques = [
@@ -29,14 +33,32 @@ import { View, Text, Button, TouchableOpacity, FlatList, StyleSheet } from "reac
                 const [phone, setPhone] = useState("");
                 const [selectedIds, setSelectedIds] = useState<string[]>([]); 
 
+
+
+
+
                 const handleSelect = (item: { id: string; title: string }) => {
                     setSelectedIds((prev) =>
                         prev.includes(item.id) ? prev.filter((id) => id !== item.id) : [...prev, item.id]
                     );
                 };
 
-                const handleSendForm = () => {
-                    if (name.trim() === "" || email.trim() === "") return;
+                const handleSendForm = async () => {
+                    if (!email || !password ){
+                    Alert.alert("Error de registro", "Por favor, complete todos los campos obligatorios.");
+                    return;
+                    }
+
+                    try{                    
+                    await register(email, password);
+                    navigation.replace("Login", {
+                    });
+                } catch (error:any){
+                    Alert.alert(
+                        "Error de registro",
+                    error?.message ?? "Error al registrar el usuario"
+                    );
+                }
 
                     dispatch(
                         setUserProfile({
